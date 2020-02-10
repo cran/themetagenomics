@@ -4,9 +4,19 @@
 \alias{t4f}
 \title{Predict taxonomic functional content via tax4fun}
 \usage{
-t4f(otu_table, rows_are_taxa, tax_table, reference_path, type = c("uproc",
-  "pauda"), short = TRUE, cn_normalize = FALSE, sample_normalize = FALSE,
-  scalar, drop = TRUE, verbose = FALSE)
+t4f(
+  otu_table,
+  rows_are_taxa,
+  tax_table,
+  reference_path,
+  type = c("uproc", "pauda"),
+  short = TRUE,
+  cn_normalize = FALSE,
+  sample_normalize = FALSE,
+  scalar,
+  drop = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{otu_table}{(required) Matrix or dataframe containing taxa abundances
@@ -24,7 +34,7 @@ information is required.}
 (t4f_silva_to_kegg.rds) and reference profiles (t4f_ref_profiles.rds). Must
 not be renamed.}
 
-\item{type}{Type of protein domain classifcation methods used to generate
+\item{type}{Type of protein domain classification methods used to generate
 references (uproc or pauda). Defaults to uproc.}
 
 \item{short}{Logical flag whether to use a short or long read

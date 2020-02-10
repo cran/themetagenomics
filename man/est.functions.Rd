@@ -8,23 +8,45 @@
 \alias{est.ml}
 \title{Estimate predicted function-topic effects}
 \usage{
-\method{est}{functions}(object, topics_subset, level = 2, method = c("hmc",
-  "ml"), seed = object$seeds$next_seed, verbose = FALSE, ...)
+\method{est}{functions}(
+  object,
+  topics_subset,
+  level = 2,
+  method = c("hmc", "ml"),
+  seed = object$seeds$next_seed,
+  verbose = FALSE,
+  ...
+)
 
-\method{est}{hmc}(object, inits, prior = c("t", "normal", "laplace"),
-  t_df = c(7, 7, 7), iters = 300, warmup = iters/2, chains = 1,
-  cores = 1, seed = sample.int(.Machine$integer.max, 1),
-  return_summary = TRUE, verbose = FALSE, ...)
+\method{est}{hmc}(
+  object,
+  inits,
+  prior = c("t", "normal", "laplace"),
+  t_df = c(7, 7, 7),
+  iters = 300,
+  warmup = iters/2,
+  chains = 1,
+  cores = 1,
+  seed = sample.int(.Machine$integer.max, 1),
+  return_summary = TRUE,
+  verbose = FALSE,
+  ...
+)
 
-\method{est}{ml}(object, iters = 1000, verbose = FALSE,
-  seed = sample.int(.Machine$integer.max, 1), ...)
+\method{est}{ml}(
+  object,
+  iters = 1000,
+  verbose = FALSE,
+  seed = sample.int(.Machine$integer.max, 1),
+  ...
+)
 }
 \arguments{
 \item{object}{(required) Ouput of \code{\link{predict.topics}}.}
 
 \item{topics_subset}{Vector of topic indexes to be evaluated. Recommended to be < 25.}
 
-\item{level}{Gene category level to evalulate. Defaults to 2.}
+\item{level}{Gene category level to evaluate. Defaults to 2.}
 
 \item{method}{String indicating either ml or hmc. Defaults to hmc.}
 
@@ -87,7 +109,7 @@ the user to either normal, t-family, or laplace (double exponential) priors if a
 desired. For the latter, each variance term is given an additional regularization parameter
 \eqn{\lambda} which in turn is distributed by a \eqn{chi-squared(1)} distribution.
 
-Unless a set of initization values are provided by the user, or the user chooses to select a random
+Unless a set of initialization values are provided by the user, or the user chooses to select a random
 initialization procedure, initial values are set at the maximum likelihood estimate via
 \code{\link[lme4]{glmer.nb}}, but at a far smaller number of iterations than had the user chosen
 ML as his or her estimation method.}

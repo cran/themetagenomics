@@ -7,10 +7,19 @@
 \usage{
 resume(object, ...)
 
-\method{resume}{effects}(object, init_type = c("last", "orig"), inits, iters,
-  warmup = iters/2, chains = 1, cores = 1,
-  seed = object$seeds$next_seed, return_summary = TRUE, verbose = FALSE,
-  ...)
+\method{resume}{effects}(
+  object,
+  init_type = c("last", "orig"),
+  inits,
+  iters,
+  warmup = iters/2,
+  chains = 1,
+  cores = 1,
+  seed = object$seeds$next_seed,
+  return_summary = TRUE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{object}{(required) Ouput of \code{\link{est.functions}}.}
@@ -49,7 +58,7 @@ from \code{\link{predict.topics}}.}
 }
 }
 \description{
-Perform HMC using a previously compiled Stan model. This is specifcally useful in
+Perform HMC using a previously compiled Stan model. This is specifically useful in
 cases when a previous fit failed to converged (i.e., Rhat > 1.1 for a portion
 of parameter estimates), thus requiring more iterations.
 }

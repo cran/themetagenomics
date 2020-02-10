@@ -2,7 +2,7 @@
 #'
 #' @param taxa_bar_n Number of taxa to show in the frequency bar plot.
 #'   Defaults to 30.
-#' @param top_n Number of taxonic groups to colorize in the frequency
+#' @param top_n Number of taxonomic groups to colorize in the frequency
 #'   bar plot. Defaults to 7.
 #' @param method Method for estimating topic correlations links.
 #'   Defaults to huge.
@@ -323,7 +323,7 @@ vis.taxa <- function(object,taxa_bar_n=30,top_n=7,method=c('huge','simple'),corr
 
          p <- 30
          d <- try(Rtsne::Rtsne(beta,3,theta=.5,perplexity=p),silent=TRUE)
-         while(class(d) == 'try-error'){
+         while(class(d)[1] == 'try-error'){
            p <- p-1
            d <- try(Rtsne::Rtsne(beta,3,theta=.5,perplexity=p),silent=TRUE)
          }

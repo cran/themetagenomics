@@ -4,9 +4,18 @@
 \alias{prepare_data}
 \title{Prepare themetadata object from data for topic modeling pipeline}
 \usage{
-prepare_data(otu_table, rows_are_taxa, tax_table, metadata, formula, refs,
-  cn_normalize = TRUE, drop = TRUE,
-  seed = sample.int(.Machine$integer.max, 1), verbose = FALSE)
+prepare_data(
+  otu_table,
+  rows_are_taxa,
+  tax_table,
+  metadata,
+  formula,
+  refs,
+  cn_normalize = TRUE,
+  drop = TRUE,
+  seed = sample.int(.Machine$integer.max, 1),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{otu_table}{(required) Matrix or dataframe containing taxa abundances
@@ -16,7 +25,7 @@ uniquely named.}
 \item{rows_are_taxa}{(required) Logical flag indicating whether otu_table
 rows correspond to taxa (TRUE) or samples (FALSE).}
 
-\item{tax_table}{Matrix or dataframe containing taxonimc information with row or
+\item{tax_table}{Matrix or dataframe containing taxonomic information with row or
 column names corresponding to the otu_table.}
 
 \item{metadata}{Matrix or dataframe containing sample information with row or
@@ -58,7 +67,7 @@ expanded as dummy variables}
 }
 \description{
 Creates a themetadata class by preprocessing data from an OTU table,
-taxonimic information, sample metadata, and a formula reflecting the preposed
+taxonomic information, sample metadata, and a formula reflecting the preposed
 relationship between sample metadata and the topics over samples
 distribution.
 }

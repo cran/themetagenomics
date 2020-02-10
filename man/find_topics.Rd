@@ -4,10 +4,20 @@
 \alias{find_topics}
 \title{Perform topic estimation on a themetadata object}
 \usage{
-find_topics(themetadata_object, K, sigma_prior = 0, model = NULL,
-  iters = 500, tol = 1e-05, batches = 1, init_type = c("Spectral",
-  "LDA", "Random"), seed = themetadata_object$seed, verbose = FALSE,
-  verbose_n = 5, control = list())
+find_topics(
+  themetadata_object,
+  K,
+  sigma_prior = 0,
+  model = NULL,
+  iters = 500,
+  tol = 1e-05,
+  batches = 1,
+  init_type = c("Spectral", "LDA", "Random"),
+  seed = themetadata_object$seed,
+  verbose = FALSE,
+  verbose_n = 5,
+  control = list()
+)
 }
 \arguments{
 \item{themetadata_object}{(required) Ouput of \code{\link{prepare_data}}.}
@@ -62,7 +72,7 @@ position corresponds to the document indexes}
 \description{
 Given a themetadata object, this function converts the OTU counts across
 samples into a document format and then fits a structural topic model by
-wrapping the \link[stm]{stm} function from pacakge stm.
+wrapping the \link[stm]{stm} function from package stm.
 }
 \details{
 Topics are estimated via \link[stm]{stm} from the stm package. The focus
@@ -91,7 +101,7 @@ hyperparameter.}
 \item{eta}{For LDA initialization, the topics over words distribution hyperparameter.}
 \item{rp.s}{For spectral initialization, scalar between 0 and 1 that controls the
 degree sparsity of random projections. Defaults to .05}
-\item{rp.p}{For spectral initialization, the dimensinoality of random projections.
+\item{rp.p}{For spectral initialization, the dimensionality of random projections.
 Defaults to 3000.}
 \item{rp.d.group.size}{For spectral initialization, the block size. Defaults to 2000.}
 \item{maxV}{For spectral initialization, the maximum number of words used during

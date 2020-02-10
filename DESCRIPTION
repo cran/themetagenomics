@@ -1,7 +1,7 @@
 Package: themetagenomics
 Title: Exploring Thematic Structure and Predicted Functionality of 16s
         rRNA Amplicon Data
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person("Stephen", "Woloszynek", email = "sw424@drexel.edu", role = c("aut", "cre"))
     )
@@ -24,11 +24,11 @@ Suggests: assertthat, covr, huge, igraph, inline, knitr, networkD3,
         proxy, rmarkdown, RcppArmadillo, Rtsne, testthat, vegan,
         viridis,
 LinkingTo: Rcpp
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2017-06-06 17:31:31 UTC; sw1
+Packaged: 2020-02-10 17:25:51 UTC; sw1
 Author: Stephen Woloszynek [aut, cre]
 Maintainer: Stephen Woloszynek <sw424@drexel.edu>
 Repository: CRAN
-Date/Publication: 2017-06-06 19:00:07 UTC
+Date/Publication: 2020-02-10 21:20:07 UTC
