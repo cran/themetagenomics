@@ -12,7 +12,7 @@
 
 <meta name="author" content="Stephen Woloszynek" />
 
-<meta name="date" content="2020-04-13" />
+<meta name="date" content="2020-04-30" />
 
 <title>Predicting Functional Content</title>
 
@@ -301,7 +301,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Predicting Functional Content</h1>
 <h4 class="author">Stephen Woloszynek</h4>
-<h4 class="date">2020-04-13</h4>
+<h4 class="date">2020-04-30</h4>
 
 
 
@@ -336,7 +336,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb4-3" data-line-number="3">                                 <span class="dt">cn_normalize=</span><span class="ot">TRUE</span>,<span class="dt">sample_normalize=</span><span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">                                 <span class="dt">drop=</span><span class="ot">TRUE</span>))</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;  33.880   0.256  34.149</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;  33.912   0.392  34.326</span></a></code></pre></div>
 <p>The sample_normalize flag simply controls whether you want raw counts or relative abundances as your output. The output is another list with 3 elements: the function table that contains the KO term counts across samples, the KEGG metadata that describes the KO terms, and PICRUSt specific metadata that has the NSTI quality control score for each OTU.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">FUNCTIONS<span class="op">$</span>fxn_table[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;            K01361 K01362 K02249 K05844 K05845</span></a>
@@ -473,7 +473,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb13-2" data-line-number="2">                             <span class="dt">reference_path=</span>tmp,<span class="dt">type=</span><span class="st">'uproc'</span>,<span class="dt">short=</span><span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">                             <span class="dt">cn_normalize=</span><span class="ot">TRUE</span>,<span class="dt">sample_normalize=</span><span class="ot">TRUE</span>,<span class="dt">drop=</span><span class="ot">TRUE</span>))</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  10.988   0.684  11.684</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  10.892   0.824  11.728</span></a></code></pre></div>
 <p>The output is analogous to what we saw when using PICRUSt except for the method metadata. For PICRUSt, this contained the NSTI quality score; for Tax4Fun, on the other hand, this contains the FTU scores, the fraction of OTUs that weren’t mapped to KO terms.</p>
 </div>
 

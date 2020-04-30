@@ -12,7 +12,7 @@
 
 <meta name="author" content="Stephen Woloszynek" />
 
-<meta name="date" content="2020-04-13" />
+<meta name="date" content="2020-04-30" />
 
 <title>Finding Thematic Structure in the David Dataset</title>
 
@@ -301,7 +301,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Finding Thematic Structure in the David Dataset</h1>
 <h4 class="author">Stephen Woloszynek</h4>
-<h4 class="date">2020-04-13</h4>
+<h4 class="date">2020-04-30</h4>
 
 
 
@@ -387,14 +387,14 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   makepredictcall.s themetagenomics</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   predict.s         themetagenomics</span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  83.604   2.868  86.565</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  84.076   2.836  86.986</span></a></code></pre></div>
 <p>We now have an object of class <em>topics</em>. We can print some information by just typing its name:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">TOPICS</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; A topics object containing a topic model with 15 topics, 745 samples and 1493 discrete taxa.</span></a></code></pre></div>
 <p>We can also visualize it by running <strong>vis(TOPICS)</strong>, but let’s hold off for now. We can obtain the same visualization, but with additional information, if we now measure the effects of our covariates found in the formula we passed into prepare_data. We have a simple method to do so</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">system.time</span>(TOPIC_EFFECTS &lt;-<span class="st"> </span><span class="kw">est</span>(TOPICS))</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;  16.524   0.400  16.937</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;  16.516   0.420  16.946</span></a></code></pre></div>
 <p>Like our topics object, this <em>effects</em> object also prints out useful information when called:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">TOPIC_EFFECTS</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; An effects object containing topic effects information.</span></a>
@@ -473,7 +473,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb15-4" data-line-number="4">FUNCTIONS &lt;-<span class="st"> </span><span class="kw">predict</span>(TOPICS,<span class="dt">reference=</span><span class="st">'silva_ko'</span>,<span class="dt">reference_path=</span>tmp,<span class="dt">cn_normalize=</span><span class="ot">TRUE</span>,<span class="dt">sample_normalize=</span><span class="ot">FALSE</span>,<span class="dt">scalar=</span><span class="dv">25</span>)</a>
 <a class="sourceLine" id="cb15-5" data-line-number="5">})</a>
 <a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;   1.852   0.072   1.930</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;   1.840   0.064   1.908</span></a></code></pre></div>
 <p>This functions object contains all of the predicted <em>KO terms</em> for Silva annotated abundances. There are a few settings you can adjust when running Tax4Fun, so definitely experiment, but the argument worth noting is scalar. Typically, we pass counts into PICRUSt or Tax4Fun; however, since we are using topic frequencies, we need to scale our topic over taxa distribution into pseudocounts. The scalar argument dictates what we are going to scale the maximum abundances to. It defaults to 100, but for the sake of time (since these models can take a while to fit), we set it to 25.</p>
 <p>Now that we have these predicted functions, we need to identify meaningful genes as a function of topic. We’ll do that via a <em>multilevel model</em>. We could try our luck using <em>maximum likelihood</em> (ML), but given the sparsity of this type of data, rarely do these models converge. Instead, we’ll initialize our target parameters using ML and then fit our model via <em>Hameltonian Monte Carlo</em> (HMC) using <em>Stan</em>. Like the other commands we’ve seen thus far, we use a method called <strong>est</strong> on our functions class. There are a few arguments we can adjust. First, we can choose the level of the KEGG hierarchy to use as our factor-levels in our pathway factor (my apologies for the multiple use of “level”). We’ll choose level 3 since level 2 is often too broad to capture any effects. Second, we can choose the priors. These default to t-distributions. We’ll go with something a little more tighter and hence informative to hopefully speed of convergence: 3 normal priors. We could also choose a Laplace prior, which effectively is the Bayesian lasso. Considering the high dimensionality of these pathway groupings, it is certainly worth trying.</p>
 <p>It should be noted that we are choosing the number of chains (so the number of runs to perform from independent starting conditions) and also the number of cores (to run these chains in parallel). For this vignette, it’ll be set to 2, since most machines should be able to parallelize across 2 cores. It is recommended to use more cores if they are available, however.</p>
